@@ -19,3 +19,10 @@ homeassistant:
 
 zwave:
   device_config: !include zwave_device_config.yaml
+
+################### Homekit #######################
+homekit:
+  auto_start: false
+  filter:
+    include_domains:
+      - light
