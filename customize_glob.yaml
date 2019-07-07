@@ -1,0 +1,12 @@
+# Generelle ikoner
+    'automation.*':
+      icon: mdi:arrow-right-drop-circle
+
+    'sensor.batt*':
+      icon: mdi:battery-charging-80
+
+    'sensor.*humidity*':
+      icon: mdi:weather-rainy
+    
+    'sensor.*luminance*':
+      icon: mdi:brightness-7
