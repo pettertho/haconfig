@@ -1,0 +1,5 @@
+household:
+    name: Household
+    entities:
+      - device_tracker.guro_flatabo_joakimsens_iphone
+      - device_tracker.petters_iphone

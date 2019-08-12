@@ -1,1 +1,39 @@
-[]
+- alias: Start HomeKit
+  trigger:
+  - platform: event
+    event_type: zwave.network_ready
+  - platform: event
+    event_type: zwave.network_complete
+  - platform: event
+    event_type: zwave.network_complete_some_dead
+  action:
+  - service: homekit.start
+  id: b3c949e6dff245f1a05d3f69a5262919
+- id: '1562529746926'
+  alias: Kommer Hjem
+  trigger:
+  - entity_id: sensor.house_mode
+    from: Borte
+    platform: state
+    to: Hjemme
+  condition: []
+  action:
+  - data:
+      brightness_pct: '50'
+      entity_id: light.dimmer_gang
+    service: light.turn_on
+- id: '1562529916887'
+  alias: Drar hjemmefra
+  trigger:
+  - entity_id: sensor.house_mode
+    from: Hjemme
+    platform: state
+    to: Borte
+  condition:
+  - condition: state
+    entity_id: input_boolean.guest_mode
+    state: 'false'
+  action:
+  - data:
+      entity_id: group.all_lights
+    service: light.turn_off

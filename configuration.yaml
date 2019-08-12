@@ -16,6 +16,9 @@ script: !include scripts.yaml
 
 homeassistant:
   customize_glob: !include customize_glob.yaml
+  customize: !include customize.yaml
+  packages:
+    house_mode: !include package_house_mode.yaml
 
 zwave:
   device_config: !include zwave_device_config.yaml
@@ -26,3 +29,44 @@ homekit:
   filter:
     include_domains:
       - light
+
+################## Google #########################
+cloud: !include google_actions.yaml
+
+#################### Zones ###################
+zone:
+#HDS
+  - name: jobb_guro
+    latitude: !secret zone_guro_jobb_lat
+    longitude: !secret zone_guro_jobb_lon
+    icon: mdi:mother-nurse
+    friendly_name: Jobb
+#MCB
+  - name: jobb_petter
+    latitude: !secret zone_petter_jobb_lat
+    longitude: !secret zone_petter_jobb_lon
+    friendly_name: Jobb
+
+########### Remote #################
+remote:
+  - platform: harmony
+    name: Harmony Stue
+    host: 10.0.0.3
+
+############## Emulated Hue ##############
+emulated_hue:
+  expose_by_default: false
+  entities:
+    light.dimmer_stue:
+      hidden: false
+    light.dimmer_kjokken:
+      hidden: false
+    group.all_lights:
+      hidden: false
+
+light:
+  - platform: group
+    name: Stue + Kjøkken
+    entities:
+      - light.dimmer_kjokken
+      - light.dimmer_stue

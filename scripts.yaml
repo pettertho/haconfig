@@ -1,0 +1,21 @@
+'1562523615249':
+  alias: Se Apple TV
+  sequence:
+  - data:
+      activity: Se Apple TV
+      entity_id: remote.harmony_stue
+    service: remote.turn_on
+'1562523672235':
+  alias: Se på TV
+  sequence:
+  - data:
+      activity: Se TV
+      entity_id: remote.harmony_stue
+    service: remote.turn_on
+'1562523704747':
+  alias: Slå av tv
+  sequence:
+  - data:
+      activity: PowerOff
+      entity_id: remote.harmony_stue
+    service: remote.turn_on
