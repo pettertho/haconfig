@@ -1,0 +1,5 @@
+resources:
+  - url: /local/button-card.js
+    type: module
+  - url: /local/bignumber-card.js
+    type: js

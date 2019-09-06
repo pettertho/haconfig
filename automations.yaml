@@ -19,8 +19,16 @@
   condition: []
   action:
   - data:
-      brightness_pct: '50'
+      brightness_pct: '15'
       entity_id: light.dimmer_gang
+    service: light.turn_on
+  - data:
+      brightness_pct: '15'
+      entity_id: light.dimmer_stue
+    service: light.turn_on
+  - data:
+      brightness_pct: '15'
+      entity_id: light.dimmer_kjokken
     service: light.turn_on
 - id: '1562529916887'
   alias: Drar hjemmefra
@@ -37,3 +45,19 @@
   - data:
       entity_id: group.all_lights
     service: light.turn_off
+- id: '1567459765400'
+  alias: Start Støve
+  trigger:
+  - entity_id: sensor.house_mode
+    for: 01:00:00
+    from: Hjemme
+    platform: state
+    to: Borte
+  condition:
+  - condition: state
+    entity_id: input_boolean.vacuum_autorun
+    state: 'on'
+  action:
+  - data:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+    service: vacuum.start

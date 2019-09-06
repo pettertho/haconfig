@@ -19,3 +19,15 @@
       activity: PowerOff
       entity_id: remote.harmony_stue
     service: remote.turn_on
+'vacuum_clean':
+  alias: vacuum_clean
+  sequence:
+  - data:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+    service: vacuum.start
+'vacuum_return_to_base':
+  alias: vacuum_return_to_base
+  sequence:
+  - data:
+      entity_id: vacuum.xiaomi_vacuum_cleaner
+    service: vacuum.return_to_base

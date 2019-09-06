@@ -3,3 +3,4 @@ google_actions:
       include_domains:
         - light
         - script
+        - vacuum

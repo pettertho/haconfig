@@ -2,10 +2,6 @@
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
-# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-# http:
-#   base_url: example.duckdns.org:8123
-
 # Text to speech
 tts:
   - platform: google_translate
@@ -35,13 +31,11 @@ cloud: !include google_actions.yaml
 
 #################### Zones ###################
 zone:
-#HDS
   - name: jobb_guro
     latitude: !secret zone_guro_jobb_lat
     longitude: !secret zone_guro_jobb_lon
     icon: mdi:mother-nurse
     friendly_name: Jobb
-#MCB
   - name: jobb_petter
     latitude: !secret zone_petter_jobb_lat
     longitude: !secret zone_petter_jobb_lon
@@ -51,7 +45,7 @@ zone:
 remote:
   - platform: harmony
     name: Harmony Stue
-    host: 10.0.0.3
+    host: !secret harmony_host
 
 ############## Emulated Hue ##############
 emulated_hue:
@@ -70,3 +64,28 @@ light:
     entities:
       - light.dimmer_kjokken
       - light.dimmer_stue
+
+vacuum:
+  - platform: xiaomi_miio
+    host: !secret xiaomi_host
+    token: !secret xiaomi_token
+
+sensor:
+  - platform: template
+    sensors:
+      vacuum_battery_charge:
+        value_template: "{{ state_attr('vacuum.xiaomi_vacuum_cleaner', 'battery_level') }}"
+      
+      vacuum_time_run:
+        value_template: "{{ state_attr('vacuum.xiaomi_vacuum_cleaner', 'cleaning_time') }}"
+      
+      vacuum_time_last_run:
+        value_template: "{{ state_attr('vacuum.xiaomi_vacuum_cleaner', 'clean_stop') }}"
+
+      vacuum_area_cleaned:
+        value_template: "{{ state_attr('vacuum.xiaomi_vacuum_cleaner', 'cleaned_area') }}"
+
+input_boolean:
+  vacuum_autorun:
+    name: Vacuum Autorun
+    initial: off
